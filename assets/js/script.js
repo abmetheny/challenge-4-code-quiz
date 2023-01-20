@@ -6,8 +6,9 @@ var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
 var startButton = document.getElementById("start");
 var quizContainer = document.getElementById("quizBody");
+var scoreContainer = document.getElementById("score");
 
-
+// Variables for question and answer rendering
 var allQuestions = [{
     question: "Commonly used data types DO NOT include:",
     choice1: "strings",
@@ -15,40 +16,44 @@ var allQuestions = [{
     choice3: "alerts",
     choice4: "numbers",
     correctAnswer: "3",
-}, {
+    }, {
     question: "The condition in an if/else statement is enclosed in _________.",
     choice1: "quotes",
     choice2: "curly brackets",
     choice3: "parentheses",
     choice4: "square brackets",
     correctAnswer: "3",
-}, {
+    }, {
     question: "Arrays in JavaScript can be used to store ________.",
     choice1: "numbers and strings",
     choice2: "other variables",
     choice3: "booleans",
     choice4: "all of the above",
     correctAnswer: "4",
-}, {
+    }, {
     question: "String values must be enclosed in ________ when being assigned to variables.",
     choice1: "commas",
     choice2: "curly brackets",
     choice3: "quotes",
     choice4: "parentheses",
     correctAnswer: "3",
-}, {
+    }, {
     question: "A very useful tool used during development and debugging for printing content to the debugger is:",
     choice1: "JavaScript",
     choice2: "terminal/bash",
     choice3: "for loops",
     choice4: "console.log",
     correctAnswer: "4",
-},
+    },
 ];
-
 const lastQuestion = allQuestions.length - 1;
 var currentQuestion = 0;
 
+// Variables for score counter
+var scoreCount = 0;
+
+
+// Functions for question and answer rendering
 function startQuiz() {
     startButton.style.display = "none";
     loadQuestion();
@@ -67,6 +72,9 @@ function loadQuestion() {
 function checkAnswer(answer) {
     if (answer == allQuestions[currentQuestion].correctAnswer) {
         console.log("Correct!");
+        scoreCount++;
+        console.log(scoreCount);
+        setScore();
         checkLength();
     }
     else {
@@ -82,9 +90,31 @@ function checkLength() {
     }
     else {
         console.log("There are no more questions.");
+        quizContainer.style.display = "none";
+        displayScore();
     }
 }
 
+// Functions for score counter
+function setScore() {
+    scoreContainer.textContent = scoreCount;
+    localStorage.setItem("score", scoreCount);
+}
+
+function displayScore() {
+    var storedScore = localStorage.getItem("score");
+
+    if (storedScore === null) {
+        scoreCount = "";
+    }
+    else {
+        scoreCount = storedScore;
+    }
+    scoreContainer.style.display = "block";
+    scoreContainer.textContent = scoreCount;
+}
+
+// Event listeners
 startButton.addEventListener("click", startQuiz);
 
 
