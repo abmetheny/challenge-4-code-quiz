@@ -7,6 +7,7 @@ var answer4 = document.getElementById("answer4");
 var startButton = document.getElementById("start");
 var quizContainer = document.getElementById("quizBody");
 var scoreContainer = document.getElementById("score");
+var initialsContainer = document.getElementById("initials");
 
 // Variables for question and answer rendering
 var allQuestions = [{
@@ -49,9 +50,9 @@ var allQuestions = [{
 const lastQuestion = allQuestions.length - 1;
 var currentQuestion = 0;
 
-// Variables for score counter
+// Variables for stored scores and initials
 var scoreCount = 0;
-
+var initials = "";
 
 // Functions for question and answer rendering
 function startQuiz() {
@@ -91,11 +92,31 @@ function checkLength() {
     else {
         console.log("There are no more questions.");
         quizContainer.style.display = "none";
+        enterInitials();
+        displayInitials();
         displayScore();
     }
 }
 
-// Functions for score counter
+// Functions for capturing high scores and initials
+function enterInitials() {
+    initials = prompt("Enter your initials to record your score:");
+    localStorage.setItem("initials", initials);
+}
+
+function displayInitials() {
+    var storedInitials = localStorage.getItem("initials");
+
+    if (storedInitials === null) {
+        initials = "";
+    }
+    else {
+        initials = storedInitials;
+    }
+    initialsContainer.style.display = "block";
+    initialsContainer.textContent = storedInitials;
+}
+
 function setScore() {
     scoreContainer.textContent = scoreCount;
     localStorage.setItem("score", scoreCount);
