@@ -99,7 +99,7 @@ function timeUp() {
 // Functions for question and answer rendering
 function startQuiz() {
     startButton.style.display = "none";
-    timerCount = 10;
+    timerCount = 30;
     startTimer();
     loadQuestion();
     quizContainer.style.display = "block";
@@ -124,6 +124,7 @@ function checkAnswer(answer) {
     else {
         console.log("Incorrect :(");
         checkLength();
+        timerCount = timerCount - 5;
     }
 }
 
@@ -153,6 +154,7 @@ function displayInitials() {
     var highScoreKeys = Object.keys(storedInitials);
     var highScoreValues = Object.values(storedInitials);
 
+    timerContainer.style.display = "none";
     scoreContainer.style.display = "block";
 
     for (let i = 0; i < highScoreKeys.length; i++) {
