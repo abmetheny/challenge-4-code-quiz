@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+
     <title>JavaScript Quiz</title>
 </head>
 <body>
 
     <button id="start">START</button>
 
-    <div id="quizBody" style = "display: none">
+    <div id="quizWrapper" style = "display: none">
 
         <h1>JavaScript Quiz</h1>
 
         <p id="question"></p>
 
-        <div id="answersContainer">
+        <div id="answersWrapper">
             <button id="answer1" onclick="checkAnswer('1')"></button>
             <button id="answer2" onclick="checkAnswer('2')"></button>
             <button id="answer3" onclick="checkAnswer('3')"></button>
@@ -25,8 +27,16 @@
 
     </div>
 
-    <div id="initials" style = "display: none"></div>
-    <div id="score" style = "display: none"></div>
+    <div id="scoreWrapper" style = "display: none">
+
+        <h1>High Scores</h1>
+
+        <ul class = "finale" id="initials">Initials: </ul>
+            <!-- <li id="initialsList"></li> -->
+        <ul class = "finale" id="score">Score: </ul>
+            <!-- <li id="scoreList"></li> -->
+
+    </div>
 
 
 

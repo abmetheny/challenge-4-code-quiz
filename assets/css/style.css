@@ -1,0 +1,12 @@
+#scoreWrapper {
+    display: flex;
+}
+
+h1 {
+    width: 100%;
+}
+
+.finale {
+    display: inline-block;
+}
+

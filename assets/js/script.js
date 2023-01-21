@@ -1,13 +1,17 @@
 // Variables to correspond to HTML elements
+var startButton = document.getElementById("start");
+var quizContainer = document.getElementById("quizWrapper");
 var question = document.getElementById("question");
+var answersContainer = document.getElementById("answersWrapper");
 var answer1 = document.getElementById("answer1");
 var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
-var startButton = document.getElementById("start");
-var quizContainer = document.getElementById("quizBody");
-var scoreContainer = document.getElementById("score");
-var initialsContainer = document.getElementById("initials");
+var scoreContainer = document.getElementById("scoreWrapper");
+var initialsText = document.getElementById("initials");
+var initialsList = document.getElementById("initialsList");
+var scoreText = document.getElementById("score");
+var scoreList = document.getElementById("scoreList");
 
 // Variables for question and answer rendering
 var allQuestions = [{
@@ -53,6 +57,7 @@ var currentQuestion = 0;
 // Variables for stored scores and initials
 var scoreCount = 0;
 var initials = "";
+var highScore = "";
 
 // Functions for question and answer rendering
 function startQuiz() {
@@ -75,7 +80,7 @@ function checkAnswer(answer) {
         console.log("Correct!");
         scoreCount++;
         console.log(scoreCount);
-        setScore();
+        // setScore();
         checkLength();
     }
     else {
@@ -93,47 +98,52 @@ function checkLength() {
         console.log("There are no more questions.");
         quizContainer.style.display = "none";
         enterInitials();
-        displayInitials();
-        displayScore();
     }
 }
 
 // Functions for capturing high scores and initials
 function enterInitials() {
     initials = prompt("Enter your initials to record your score:");
-    localStorage.setItem("initials", initials);
+    localStorage.setItem(initials, scoreCount);
+    displayInitials();
 }
 
 function displayInitials() {
-    var storedInitials = localStorage.getItem("initials");
+    var storedInitials = {...localStorage};
+    console.log(storedInitials);
+    var highScoreKeys = Object.keys(storedInitials);
+    var highScoreValues = Object.values(storedInitials);
 
-    if (storedInitials === null) {
-        initials = "";
-    }
-    else {
-        initials = storedInitials;
-    }
-    initialsContainer.style.display = "block";
-    initialsContainer.textContent = storedInitials;
-}
-
-function setScore() {
-    scoreContainer.textContent = scoreCount;
-    localStorage.setItem("score", scoreCount);
-}
-
-function displayScore() {
-    var storedScore = localStorage.getItem("score");
-
-    if (storedScore === null) {
-        scoreCount = "";
-    }
-    else {
-        scoreCount = storedScore;
-    }
+    // console.log(Object.keys(storedInitials));
+    // console.log(Object.values(storedInitials));
     scoreContainer.style.display = "block";
-    scoreContainer.textContent = scoreCount;
+
+    for (let i = 0; i < highScoreKeys.length; i++) {
+        
+        if (storedInitials === null) {
+            initials = "";
+        }
+        else {
+            initials = highScoreKeys;
+            highScore = highScoreValues;
+        }
+
+        var liInitials = document.createElement('li');
+        liInitials.appendChild(document.createTextNode(`${highScoreKeys[i]}`))
+        document.getElementById('initials').appendChild(liInitials);
+
+        var liScore = document.createElement('li');
+        liScore.appendChild(document.createTextNode(`${highScoreValues[i]}`));
+        document.getElementById('score').appendChild(liScore);
+        // initialsList.append(`${highScoreKeys[i]}\r\n`);
+        // scoreList.append(`${highScoreValues[i]}\r\n`);
+
+        
+    }
+
 }
+
+
 
 // Event listeners
 startButton.addEventListener("click", startQuiz);
@@ -179,7 +189,22 @@ startButton.addEventListener("click", startQuiz);
 // }
 
 
+// function setScore() {
+//     localStorage.setItem("score", scoreCount);
+// }
 
+// function displayScore() {
+//     var storedScore = localStorage.getItem("score");
+
+//     if (storedScore === null) {
+//         scoreCount = "";
+//     }
+//     else {
+//         scoreCount = storedScore;
+//     }
+
+//     scoreText.textContent = scoreCount;
+// }
 
 
 
@@ -218,3 +243,10 @@ startButton.addEventListener("click", startQuiz);
 // var answerCs = ["alerts", "parentheses", "booleans", "quotes", "for loops", ];
 // var answerDs = ["numbers", "square brackets", "all of the above", "parentheses", "console.log"];
 // var correcAnswers = ["alerts","parentheses", "all of the above", "quotes", "console.log"]
+
+
+// function whatever(tacocat){
+//     let isPalindrome = tacocat.split("").reverse().join("")
+
+// return (isPalindrome == tacocat) ? "true" : "false"
+// }
