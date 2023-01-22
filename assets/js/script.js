@@ -1,4 +1,5 @@
 // Variables to correspond to HTML elements
+var startContainer = document.getElementById("startWrapper");
 var startButton = document.getElementById("start");
 var quizContainer = document.getElementById("quizWrapper");
 var question = document.getElementById("question");
@@ -72,7 +73,7 @@ function startTimer() {
     // Sets timer
     timer = setInterval(function() {
       timerCount--;
-      timerText.textContent = timerCount;
+      timerText.textContent = "Time remaining: " + timerCount;
       if (timerCount >= 0) {
         // Tests if win condition is met
         if (isWin && timerCount > 0) {
@@ -91,18 +92,18 @@ function startTimer() {
 
 function timeUp() {
     quizContainer.style.display = "none";
-    timerContainer.style.display = "none";
+    // timerContainer.style.display = "none";
     alert("Time's up!  Please try again.");
-    startButton.style.display = "block";
+    startWrapper.style.display = "flex";
 }
 
 // Functions for question and answer rendering
 function startQuiz() {
-    startButton.style.display = "none";
+    startWrapper.style.display = "none";
     timerCount = 30;
     startTimer();
     loadQuestion();
-    quizContainer.style.display = "block";
+    quizContainer.style.display = "flex";
 }
 
 function loadQuestion() {
@@ -154,8 +155,8 @@ function displayInitials() {
     var highScoreKeys = Object.keys(storedInitials);
     var highScoreValues = Object.values(storedInitials);
 
-    timerContainer.style.display = "none";
-    scoreContainer.style.display = "block";
+    // timerContainer.style.display = "none";
+    scoreContainer.style.display = "flex";
 
     for (let i = 0; i < highScoreKeys.length; i++) {
         
