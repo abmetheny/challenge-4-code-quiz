@@ -10,9 +10,9 @@ var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
 var scoreContainer = document.getElementById("scoreWrapper");
 var initialsText = document.getElementById("initials");
-var initialsList = document.getElementById("initialsList");
+// var initialsList = document.getElementById("initialsList");
 var scoreText = document.getElementById("score");
-var scoreList = document.getElementById("scoreList");
+// var scoreList = document.getElementById("scoreList");
 var timerContainer = document.getElementById("timerWrapper");
 var timerText = document.getElementById("timer");
 
@@ -178,7 +178,22 @@ function displayInitials() {
         
     }
 
+    // sortList(highScoreValues);
+
 }
+
+// function sortList(highScoreValues) {
+//     var listItem = document.getElementById('score').highScoreValues;
+//     var listLength = score.length;
+//     var list = [];
+//     for (var i = 0; i < listLength; i++) {
+//         list[i] = listItem[i].firstChild.nodeValue;
+//         list.sort();
+//     }
+//     for (var i = 0; i < listLength; i++) {
+//         listItem[i].firstChild.nodeValue = list[i];
+//     }
+// }
 
 // Event listeners
 startButton.addEventListener("click", startQuiz);
