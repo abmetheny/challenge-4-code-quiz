@@ -22,6 +22,7 @@ THEN I can save my initials and score
 ## Description of Work Performed
 Wrote HTML, JavaScript, and CSS files from scratch to generate the following:
 * A splash page that lists the name of the quiz and a clickable "Start" button
+* User can click to view high scores from the start screen
 * Once the "Start" button is clicked:
   * The first quiz question loads and a 30 second countdown timer begins
   * Once the user selects a clickable answer button, the next question begins
@@ -29,6 +30,7 @@ Wrote HTML, JavaScript, and CSS files from scratch to generate the following:
   * If time runs out before the final question is answered, an alert notification will pop up and the game will start over
   * If the user answers all questions, they are prompted to input their initials to save their score
 * If the user completes the quiz, they will be shown a page that displays previous initials and scores
+* Buttons on the score history page allow the user to restart the quiz or clear previously saved scores
 
 ## Link to deployed GitHub page
 [Deployed Challenge 4 Code Quiz Repo](https://abmetheny.github.io/challenge-4-code-quiz/)
