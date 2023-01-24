@@ -28,6 +28,13 @@
     transition: all 0.3s ease 0s;
 }
 
+#startWrapper a {
+    color: #7b38d8;
+    font-size: 18px;
+    margin: 5px;
+    
+}
+
 #timerWrapper {
     display: flex;
     justify-content: flex-start;
@@ -118,10 +125,15 @@
     font-weight: normal;
 }
 
-#startOver {
+#scoreButtonWrapper {
+    width: 100%;
+    padding: 10px;
+}
+
+.scoreButton {
     background-color: #3c1b6a;
     padding: 10px;
-    width: 100%;
+    width: 200px;
     color: #ffffff;
     border: 4px double #cccccc;
     border-radius: 10px;
@@ -130,7 +142,7 @@
     margin: 5px;
 }
 
-#startOver:hover {
+.scoreButton:hover {
     background-color: black;
     transition: all 0.3s ease 0s;
 }

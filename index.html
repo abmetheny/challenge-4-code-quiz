@@ -14,8 +14,8 @@
 
         <h1>Test your JavaScript knowledge!</h1>
         <h2>Click "Start" to begin the quiz.</h2>
-
         <button id="start">START</button>
+        <a id="viewHighScores" href="#">View High Scores</a>
 
     </div>
 
@@ -40,9 +40,12 @@
 
     <div id="scoreWrapper" style = "display: none">
         <h1>Score History</h1>
-        <ul class = "finale" id="initials">Initials: </ul>
-        <ul class = "finale" id="score">Score: </ul>
-        <button id="startOver">Try Again</button>
+        <ul class="finale" id="initials">Initials: </ul>
+        <ul class="finale" id="score">Score: </ul>
+        <div id="scoreButtonWrapper">
+            <button class="scoreButton" id="startOver">Try Again</button>
+            <button class="scoreButton" id="clearScores">Clear Scores</button>
+        </div>
     </div>
 
 

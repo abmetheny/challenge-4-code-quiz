@@ -1,5 +1,6 @@
 // Variables to correspond to HTML elements
 var startContainer = document.getElementById("startWrapper");
+var viewHighScores = document.getElementById("viewHighScores");
 var startButton = document.getElementById("start");
 var quizContainer = document.getElementById("quizWrapper");
 var question = document.getElementById("question");
@@ -14,6 +15,7 @@ var scoreText = document.getElementById("score");
 var timerContainer = document.getElementById("timerWrapper");
 var timerText = document.getElementById("timer");
 var startOverButton = document.getElementById("startOver");
+var clearScoresButton = document.getElementById("clearScores");
 
 // Variables for question and answer rendering
 var allQuestions = [{
@@ -191,6 +193,24 @@ function displayInitials() {
 
 }
 
+// Displays record of high scores from start screen
+function viewScores(){
+    // Event.preventDefault();
+    displayInitials();
+    startContainer.style.display = "none";
+    quizContainer.style.display = "none";
+    scoreContainer.style.display = "flex";
+}
+
+// Clears previous scores from local storage
+function clearScores() {
+    localStorage.clear();
+    initialsText.textContent = "Initials: ";
+    scoreText.textContent = "Score: ";
+}
+
 // Event listeners
 startButton.addEventListener("click", startQuiz);
+viewHighScores.addEventListener("click", viewScores);
 startOverButton.addEventListener("click", startScreen);
+clearScoresButton.addEventListener("click", clearScores);
