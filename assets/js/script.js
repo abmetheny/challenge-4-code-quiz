@@ -94,11 +94,9 @@ function timeUp() {
 
 // Functions for question and answer rendering
 
-// Loads the start screen
+// Reloads the page to land on start screen
 function startScreen() {
-    startContainer.style.display = "flex";
-    quizContainer.style.display = "none";
-    scoreContainer.style.display = "none";
+    location.reload();
 }
 
 // Hides the start screen, starts the timer, and loads the first question
