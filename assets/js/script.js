@@ -80,18 +80,18 @@ function startTimer() {
           clearInterval(timer);
         }
       }
-      if (timerCount === 0) {
+      if (timerCount <= 0) {
         clearInterval(timer);
         timeUp();
       }
     }, 1000);
 }
 
-// If time reaches 0, the quiz ends and brings the user back to the start screen
+// If time reaches 0, the quiz ends and prompts the user to record their initials to store their score
 function timeUp() {
     quizContainer.style.display = "none";
-    alert("Time's up!  Please try again.");
-    startContainer.style.display = "flex";
+    alert("You ran out of time!");
+    enterInitials();
 }
 
 // Functions for question and answer rendering

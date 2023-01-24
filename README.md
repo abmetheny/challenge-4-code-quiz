@@ -27,9 +27,9 @@ Wrote HTML, JavaScript, and CSS files from scratch to generate the following:
   * The first quiz question loads and a 30 second countdown timer begins
   * Once the user selects a clickable answer button, the next question begins
   * If the user chose an incorrect answer, 5 seconds is subtracted from the countdown timer
-  * If time runs out before the final question is answered, an alert notification will pop up and the game will start over
+  * If time runs out before the final question is answered, the quiz ends and the user is prompted for their initials to save their score
   * If the user answers all questions, they are prompted to input their initials to save their score
-* If the user completes the quiz, they will be shown a page that displays previous initials and scores
+* Once the quiz ends, the user is shown a page that displays all previous initials and scores
 * Buttons on the score history page allow the user to restart the quiz or clear previously saved scores
 
 ## Link to deployed GitHub page
