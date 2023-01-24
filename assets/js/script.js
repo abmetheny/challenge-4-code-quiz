@@ -10,12 +10,10 @@ var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
 var scoreContainer = document.getElementById("scoreWrapper");
 var initialsText = document.getElementById("initials");
-// var initialsList = document.getElementById("initialsList");
 var scoreText = document.getElementById("score");
-// var scoreList = document.getElementById("scoreList");
 var timerContainer = document.getElementById("timerWrapper");
 var timerText = document.getElementById("timer");
-
+var startOverButton = document.getElementById("startOver");
 
 // Variables for question and answer rendering
 var allQuestions = [{
@@ -69,43 +67,51 @@ var timerCount;
 var isWin = false;
 
 // Functions for running the timer
+
+// Adds timer to the page, tests whether the quiz is over or time has run out, and stops the timer
 function startTimer() {
-    // Sets timer
     timer = setInterval(function() {
       timerCount--;
       timerText.textContent = "Time remaining: " + timerCount;
       if (timerCount >= 0) {
-        // Tests if win condition is met
         if (isWin && timerCount > 0) {
-          // Clears interval and stops timer
           clearInterval(timer);
         }
       }
-      // Tests if time has run out
       if (timerCount === 0) {
-        // Clears interval
         clearInterval(timer);
         timeUp();
       }
     }, 1000);
 }
 
+// If time reaches 0, the quiz ends and brings the user back to the start screen
 function timeUp() {
     quizContainer.style.display = "none";
-    // timerContainer.style.display = "none";
     alert("Time's up!  Please try again.");
-    startWrapper.style.display = "flex";
+    startContainer.style.display = "flex";
 }
 
 // Functions for question and answer rendering
+
+// Loads the start screen
+function startScreen() {
+    startContainer.style.display = "flex";
+    quizContainer.style.display = "none";
+    scoreContainer.style.display = "none";
+}
+
+// Hides the start screen, starts the timer, and loads the first question
 function startQuiz() {
-    startWrapper.style.display = "none";
+    startContainer.style.display = "none";
+    scoreContainer.style.display = "none";
     timerCount = 30;
     startTimer();
     loadQuestion();
     quizContainer.style.display = "flex";
 }
 
+// Populates text fields using the question/answer array
 function loadQuestion() {
     var q = allQuestions[currentQuestion];
     question.innerHTML = "<p>" + q.question + "</p>";
@@ -115,27 +121,25 @@ function loadQuestion() {
     answer4.innerHTML = q.choice4;
 }
 
+// Checks whether the answer selected is correct; adds to the score count if correct, subtracts time from the timer if incorrect
 function checkAnswer(answer) {
     if (answer == allQuestions[currentQuestion].correctAnswer) {
-        console.log("Correct!");
         scoreCount++;
-        console.log(scoreCount);
         checkLength();
     }
     else {
-        console.log("Incorrect :(");
         checkLength();
         timerCount = timerCount - 5;
     }
 }
 
+// Checks whether there are any more questions/answers to load from the array; if not, prompts the user to enter their initials
 function checkLength() {
     if (currentQuestion < lastQuestion) {
         currentQuestion++;
         loadQuestion();
     }
     else {
-        console.log("There are no more questions.");
         clearInterval(timer);
         quizContainer.style.display = "none";
         enterInitials();
@@ -143,22 +147,31 @@ function checkLength() {
 }
 
 // Functions for capturing high scores and initials
+
+// Prompts the user to enter their initials until a valid entry is recorded
 function enterInitials() {
     initials = prompt("Enter your initials to record your score:");
-    localStorage.setItem(initials, scoreCount);
-    displayInitials();
+    if (!initials) {
+        alert("Initials must be entered to record score.")
+        enterInitials();
+    }
+    else {
+        localStorage.setItem(initials, scoreCount);
+        displayInitials();
+    }   
 }
 
+// Retrieves the initial/score (key/value) pair from local storage, sorts by highest to lowest score, and populates text fields in the HTML
 function displayInitials() {
     var storedInitials = {...localStorage};
-    console.log(storedInitials);
-    var highScoreKeys = Object.keys(storedInitials);
-    var highScoreValues = Object.values(storedInitials);
+    var entries = Object.entries(storedInitials);
+    var sorted = entries.sort((a, b) => b[1] - a[1]);
+    var highScoreKeys = Object.keys(sorted);
+    var highScoreValues = Object.values(sorted);
 
-    // timerContainer.style.display = "none";
     scoreContainer.style.display = "flex";
 
-    for (let i = 0; i < highScoreKeys.length; i++) {
+    for (let i = 0; i < highScoreValues.length; i++) {
         
         if (storedInitials === null) {
             initials = "";
@@ -169,31 +182,17 @@ function displayInitials() {
         }
 
         var liInitials = document.createElement('li');
-        liInitials.appendChild(document.createTextNode(`${highScoreKeys[i]}`))
+        liInitials.appendChild(document.createTextNode(`${highScoreValues[i][0]}`))
         document.getElementById('initials').appendChild(liInitials);
 
         var liScore = document.createElement('li');
-        liScore.appendChild(document.createTextNode(`${highScoreValues[i]}`));
+        liScore.appendChild(document.createTextNode(`${highScoreValues[i][1]}`));
         document.getElementById('score').appendChild(liScore);
         
     }
 
-    // sortList(highScoreValues);
-
 }
-
-// function sortList(highScoreValues) {
-//     var listItem = document.getElementById('score').highScoreValues;
-//     var listLength = score.length;
-//     var list = [];
-//     for (var i = 0; i < listLength; i++) {
-//         list[i] = listItem[i].firstChild.nodeValue;
-//         list.sort();
-//     }
-//     for (var i = 0; i < listLength; i++) {
-//         listItem[i].firstChild.nodeValue = list[i];
-//     }
-// }
 
 // Event listeners
 startButton.addEventListener("click", startQuiz);
+startOverButton.addEventListener("click", startScreen);
